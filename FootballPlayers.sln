@@ -18,6 +18,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballPlayers.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballPlayers.Infrastructure.Context", "src\Infrastructure\FootballPlayers.Infrastructure.Context\FootballPlayers.Infrastructure.Context.csproj", "{AC4162DC-0AD8-4E57-8FF4-B1FEADDAF8BB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{646404E9-DD43-44C7-BCB4-09FD94D1125B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballPlayers.Common", "src\Shared\FootballPlayers.Common\FootballPlayers.Common.csproj", "{B4018C46-89D0-4FB6-9B3D-5323F6A50641}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,8 @@ Global
 		{74AC6BBB-3A93-4CD3-BB86-11E0504EE9E4} = {490E979C-921C-4B48-B166-5FFFF4B225D8}
 		{CB0394FA-7150-4BCA-89B8-02C95A056747} = {490E979C-921C-4B48-B166-5FFFF4B225D8}
 		{AC4162DC-0AD8-4E57-8FF4-B1FEADDAF8BB} = {31FE1B1C-C5ED-41B2-BC98-E352C769A95C}
+		{646404E9-DD43-44C7-BCB4-09FD94D1125B} = {6AE44C96-4476-4770-B5F7-86F08F94280F}
+		{B4018C46-89D0-4FB6-9B3D-5323F6A50641} = {646404E9-DD43-44C7-BCB4-09FD94D1125B}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{0059F9BC-798E-4B4E-A767-444961259AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -49,5 +55,9 @@ Global
 		{AC4162DC-0AD8-4E57-8FF4-B1FEADDAF8BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC4162DC-0AD8-4E57-8FF4-B1FEADDAF8BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC4162DC-0AD8-4E57-8FF4-B1FEADDAF8BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4018C46-89D0-4FB6-9B3D-5323F6A50641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4018C46-89D0-4FB6-9B3D-5323F6A50641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4018C46-89D0-4FB6-9B3D-5323F6A50641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4018C46-89D0-4FB6-9B3D-5323F6A50641}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
