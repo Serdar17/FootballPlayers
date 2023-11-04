@@ -7,23 +7,15 @@ services.AddHttpContextAccessor()
     .AddAppController()
     .AddAppCors()
     .AddAppAutoMappers()
-    .AddEndpointsApiExplorer()
-    .AddSwaggerGen();
+    .AddAppSwagger();
     
 builder.AddAppLogger();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAppMiddlewares();
 app.UseAppCors();
+app.UseAppMiddlewares();
+app.UseAppSwagger();
 app.UseAppController();
 
 app.Run();
