@@ -1,0 +1,15 @@
+version: '3.8'
+
+services: 
+  players_postgresql:
+    image: postgres:latest
+    
+  players_api:
+    image: ${DOCKER_REGISTRY-}playersapi
+    build:
+      context: .
+      dockerfile: src/Web/Api/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on: 
+      - players_postgresql

@@ -8,4 +8,15 @@ public static class StringExtensions
     {
         return JsonNamingPolicy.CamelCase.ConvertName(str);
     }
+    
+    public static string ToTitleCase(this string? str)
+    {
+        if (str is null)
+            return null;
+
+        if (str.Length > 1)
+            return char.ToUpper(str[0]) + str.Substring(1);
+
+        return str.ToUpper();
+    }
 }

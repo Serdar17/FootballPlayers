@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  players_postgresql:
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=9AW6zul3vlbVE2G
+    ports:
+      - "54321:5432"
+    networks: 
+      - shared_players
+    volumes:
+      - ~/.docker-players/postgresql/data/:/var/lib/postgresql/data
+  
+  players_api:
+    ports:
+      - "10000:80"
+    environment:
+      - DATABASE__CONNECTIONSTRING=Server=host.docker.internal:54321;Database=Players;User Id=postgres;Password=9AW6zul3vlbVE2G;
+    networks:
+      - shared_players
+
+networks:
+  shared_players:
+    driver: bridge    
