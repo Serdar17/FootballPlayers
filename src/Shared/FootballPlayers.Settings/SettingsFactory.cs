@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace CRM.Settings;
+namespace FootballPlayers.Settings;
 
 public static class SettingsFactory
 {

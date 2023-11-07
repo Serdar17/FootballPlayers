@@ -3,6 +3,7 @@ using AutoMapper;
 using FootballPlayers.Common.Responses;
 using FootballPlayers.Players;
 using FootballPlayers.Players.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -50,21 +51,23 @@ public class PlayerController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(typeof(NoContent), 204)]
     public async Task<IActionResult> CreatePlayer([FromBody] CreatePlayerRequest request)
     {
         var model = _mapper.Map<CreatePlayerModel>(request);
         await _playerService.CreatePlayer(model);
         await SendDataAsync();
-        return Ok();
+        return NoContent();
     }
     
     [HttpPut]
+    [ProducesResponseType(typeof(NoContent), 204)]
     public async Task<IActionResult> UpdatePlayer([FromBody] UpdatePlayerRequest request)
     {
         var model = _mapper.Map<UpdatePlayerModel>(request);
         await _playerService.UpdatePlayer(model);
         await SendDataAsync();
-        return Ok();
+        return NoContent();
     }
     
     [ProducesResponseType(typeof(NoContentResult), 204)]

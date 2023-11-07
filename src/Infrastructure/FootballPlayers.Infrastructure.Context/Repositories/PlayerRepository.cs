@@ -29,16 +29,14 @@ public class PlayerRepository : IPlayerRepository
                 .FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
 
-    public Task CreateAsync(Player model)
+    public async Task CreateAsync(Player model)
     {
-        throw new NotImplementedException();
+        await _context.Players.AddAsync(model);
     }
-
-    // TODO: return updated player
-    public Task UpdateAsync(Player model)
+    
+    public async Task UpdateAsync(Player model)
     {
-        var entity = _context.Players.Update(model);
-        return Task.CompletedTask;
+       _context.Players.Update(model);
     }
 
     public async Task DeleteAsync(Guid id)

@@ -24,7 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Domain\FootballPlayers.Models\FootballPlayers.Models.csproj" />
       <ProjectReference Include="..\..\Infrastructure\FootballPlayers.Infrastructure.Context\FootballPlayers.Infrastructure.Context.csproj" />
       <ProjectReference Include="..\..\Services\FootballPlayers.Players\FootballPlayers.Players.csproj" />
       <ProjectReference Include="..\..\Shared\FootballPlayers.Common\FootballPlayers.Common.csproj" />

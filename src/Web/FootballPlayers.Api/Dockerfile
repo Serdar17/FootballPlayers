@@ -12,7 +12,6 @@ COPY ["src/Domain/FootballPlayers.Domain/FootballPlayers.Domain.csproj", "src/Do
 COPY ["src/Shared/FootballPlayers.Common/FootballPlayers.Common.csproj", "src/Shared/FootballPlayers.Common/"]
 COPY ["src/Services/FootballPlayers.Players/FootballPlayers.Players.csproj", "src/Services/FootballPlayers.Players/"]
 COPY ["src/Infrastructure/FootballPlayers.Infrastructure.Context/FootballPlayers.Infrastructure.Context.csproj", "src/Infrastructure/FootballPlayers.Infrastructure.Context/"]
-COPY ["src/Domain/FootballPlayers.Models/FootballPlayers.Models.csproj", "src/Domain/FootballPlayers.Models/"]
 RUN dotnet restore "src/Web/FootballPlayers.Api/FootballPlayers.Api.csproj"
 COPY . .
 WORKDIR "/src/src/Web/FootballPlayers.Api"

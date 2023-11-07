@@ -1,4 +1,5 @@
-﻿using FootballPlayers.Domain.Entities;
+﻿using FootballPlayers.Common.Exeptions;
+using FootballPlayers.Domain.Entities;
 using FootballPlayers.Infrastructure.Abstractions.Context;
 using FootballPlayers.Infrastructure.Abstractions.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -28,19 +29,23 @@ public class TeamRepository : ITeamRepository
         return _context.Teams.Select(x => x.Name);
     }
 
-    public Task<IEnumerable<Team>> GetAllAsync()
+    public async Task<IEnumerable<Team>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return _context.Teams
+            .Include(x => x.Players)
+            .AsEnumerable();
     }
 
     public Task<Team?> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return _context.Teams
+            .Include(x => x.Players)
+            .FirstOrDefaultAsync(x => x.Id.Equals(id));
     }
 
-    public Task CreateAsync(Team model)
+    public async Task CreateAsync(Team model)
     {
-        throw new NotImplementedException();
+        await _context.Teams.AddAsync(model);
     }
 
     public async Task UpdateAsync(Team model)
@@ -48,10 +53,10 @@ public class TeamRepository : ITeamRepository
         _context.Teams.Update(model);
     }
 
-    public Task DeleteAsync(Guid id)
+    public async Task DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var entity = await GetByIdAsync(id);
+        ProcessException.ThrowIf(() => entity is null, $"Player with id={id} was not found");
+        _context.Teams.Remove(entity);
     }
-
-
 }

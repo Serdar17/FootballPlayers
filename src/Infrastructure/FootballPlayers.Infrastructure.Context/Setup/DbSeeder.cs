@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FootballPlayers.Domain.Entities;
+using FootballPlayers.Domain.Enums;
+using FootballPlayers.Infrastructure.Abstractions.Context;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FootballPlayers.Infrastructure.Context.Setup;
@@ -6,7 +8,7 @@ namespace FootballPlayers.Infrastructure.Context.Setup;
 public static class DbSeeder
 {
     private static IServiceScope ServiceScope(IServiceProvider serviceProvider) => serviceProvider.GetService<IServiceScopeFactory>()!.CreateScope();
-    private static AppDbContext DbContext(IServiceProvider serviceProvider) => ServiceScope(serviceProvider).ServiceProvider.GetRequiredService<AppDbContext>();
+    private static IAppDbContext DbContext(IServiceProvider serviceProvider) => ServiceScope(serviceProvider).ServiceProvider.GetRequiredService<IAppDbContext>();
 
     public static void Execute(IServiceProvider serviceProvider, bool addDemoData)
     {
@@ -24,60 +26,61 @@ public static class DbSeeder
 
     private static async Task ConfigureDemoData(IServiceProvider serviceProvider)
     {
-        // await AddBooks(serviceProvider);
+        await AddPlayersAsync(serviceProvider);
     }
 
-    // private static async Task AddBooks(IServiceProvider serviceProvider)
-    // {
-    //     await using var context = DbContext(serviceProvider);
-    //
-    //     if (context.Books.Any() || context.Authors.Any() || context.Categories.Any())
-    //         return;
-    //
-    //     var a1 = new Entities.Author()
-    //     {
-    //         Name = "Mark Twen",
-    //         Detail = new Entities.AuthorDetail()
-    //         {
-    //             Country = "USA",
-    //             Family = "",
-    //         }
-    //     };
-    //     context.Authors.Add(a1);
-    //
-    //     var a2 = new Entities.Author()
-    //     {
-    //         Name = "Lev Tolstoy",
-    //         Detail = new Entities.AuthorDetail()
-    //         {
-    //             Country = "Russia",
-    //             Family = "",
-    //         }
-    //     };
-    //     context.Authors.Add(a2);
-    //
-    //     var c1 = new Entities.Category()
-    //     {
-    //         Title = "Classic"
-    //     };
-    //     context.Categories.Add(c1);
-    //
-    //     context.Books.Add(new Entities.Book()
-    //     {
-    //         Title = "Tom Soyer",
-    //         description = "description description description description ",
-    //         Author = a1,
-    //         Categories = new List<Entities.Category>() { c1 },
-    //     });
-    //
-    //     context.Books.Add(new Entities.Book()
-    //     {
-    //         Title = "War and peace",
-    //         description = "description description description description ",
-    //         Author = a2,
-    //         Categories = new List<Entities.Category>() { c1 },
-    //     });
-    //
-    //     context.SaveChanges();
-    // }
+    private static async Task AddPlayersAsync(IServiceProvider serviceProvider)
+    {
+        var context = DbContext(serviceProvider);
+    
+        if (context.Players.Any() || context.Teams.Any())
+            return;
+
+        var messi = new Player
+        {
+            Name = "Lionel",
+            Surname = "Messi",
+            Gender = Gender.Male,
+            Country = Country.USA,
+            BirthDate = new DateTime(1984, 06, 24),
+        };
+
+        var mostovoy = new Player
+        {
+            Name = "Andrey",
+            Surname = "Mostovoy",
+            Gender = Gender.Male,
+            Country = Country.Russia,
+            BirthDate = new DateTime(1997, 11, 05),
+        };
+
+        var acherby = new Player
+        {
+            Name = "Acherby",
+            Surname = "Franchesco",
+            Gender = Gender.Male,
+            Country = Country.Russia,
+            BirthDate = new DateTime(1988, 02, 10),
+        };
+
+        context.Teams.Add(new Team
+        {
+            Name = "Inter Miami",
+            Players = new List<Player>{ messi }
+        });
+        
+        context.Teams.Add(new Team
+        {
+            Name = "Milan",
+            Players = new List<Player>{ acherby }
+        });
+        
+        context.Teams.Add(new Team
+        {
+            Name = "Zenit",
+            Players = new List<Player>{ mostovoy }
+        });
+    
+        await context.SaveAsync();
+    }
 }
