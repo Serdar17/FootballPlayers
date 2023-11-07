@@ -18,14 +18,26 @@ public class PlayerService : IPlayerService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<Player>> GetPlayersAsync()
+    public async Task<IEnumerable<PlayerModel>> GetPlayersAsync()
     {
-        return await _unitOfWork.PlayerRepository.GetAllAsync();
+        var players = await _unitOfWork.PlayerRepository.GetAllAsync();
+        return players.Select(x => _mapper.Map<PlayerModel>(x));
+    }
+
+    public async Task<PlayerModel> GetPlayerByIdAsync(Guid id)
+    {
+        var player = await _unitOfWork.PlayerRepository.GetByIdAsync(id);
+        return _mapper.Map<PlayerModel>(player);
+    }
+
+    public async Task<IEnumerable<string>> GetTeamNamesAsync()
+    {
+        return await _unitOfWork.TeamRepository.GetNamesAsync();
     }
 
     public async Task CreatePlayer(CreatePlayerModel model)
     {
-        var team = await _unitOfWork.TeamRepository.GetByName(model.TeamName.ToTitleCase()) 
+        var team = await _unitOfWork.TeamRepository.GetByNameAsync(model.TeamName.ToTitleCase()) 
                    ?? new Team { Name = model.TeamName.ToTitleCase() };
 
         var player = _mapper.Map<Player>(model);
@@ -51,7 +63,7 @@ public class PlayerService : IPlayerService
         
         player.Team.Players.Remove(player);
             
-        var team = await _unitOfWork.TeamRepository.GetByName(model.TeamName.ToTitleCase()) ??
+        var team = await _unitOfWork.TeamRepository.GetByNameAsync(model.TeamName.ToTitleCase()) ??
                    new Team { Name = model.TeamName.ToTitleCase() };
 
         _mapper.Map(model, player);

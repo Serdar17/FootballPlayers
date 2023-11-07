@@ -15,10 +15,16 @@ services:
   
   players_api:
     ports:
-      - "10000:80"
+      - "5297:80"
     environment:
       - DATABASE__CONNECTIONSTRING=Server=host.docker.internal:54321;Database=Players;User Id=postgres;Password=9AW6zul3vlbVE2G;
     networks:
+      - shared_players
+  
+  players_web:
+    ports:
+      - "5085:80"
+    networks: 
       - shared_players
 
 networks:

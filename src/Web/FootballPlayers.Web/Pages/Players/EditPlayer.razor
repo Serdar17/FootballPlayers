@@ -1,0 +1,10 @@
+﻿@page "/edit/{PlayerId}"
+@inherits EditPlayerBase;
+
+<CascadingValue Value="Model" Name="Model">
+    <CascadingValue Value="Title" Name="Title">
+        <CascadingValue Value="IsEdit" Name="EditMode">
+            <PlayerForm />
+        </CascadingValue>
+    </CascadingValue>
+</CascadingValue>

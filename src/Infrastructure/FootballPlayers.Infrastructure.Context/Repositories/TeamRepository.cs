@@ -14,7 +14,7 @@ public class TeamRepository : ITeamRepository
         _context = context;
     }
 
-    public async Task<Team?> GetByName(string teamName)
+    public async Task<Team?> GetByNameAsync(string teamName)
     {
         var team = await _context
             .Teams
@@ -22,6 +22,12 @@ public class TeamRepository : ITeamRepository
 
         return team;
     }
+
+    public async Task<IEnumerable<string>> GetNamesAsync()
+    {
+        return _context.Teams.Select(x => x.Name);
+    }
+
     public Task<IEnumerable<Team>> GetAllAsync()
     {
         throw new NotImplementedException();

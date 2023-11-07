@@ -15,9 +15,11 @@ public class PlayerRepository : IPlayerRepository
         _context = context;
     }
 
-    public Task<IEnumerable<Player>> GetAllAsync()
+    public async Task<IEnumerable<Player>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Players
+            .Include(x => x.Team)
+            .ToListAsync();
     }
 
     public async Task<Player?> GetByIdAsync(Guid id)

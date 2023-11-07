@@ -1,0 +1,82 @@
+﻿@using FootballPlayers.Domain.Enums
+@inherits PlayerFromBase
+
+@if (Model is null)
+{
+	<MudProgressCircular Color="Color.Default" Indeterminate="true" />
+}
+else
+{
+	<MudGrid Justify="Justify.Center" Class="mt-8">
+	<MudItem xs="12" sm="4">
+		<MudText Typo="Typo.h4" Class="mb-4" Align="Align.Center">@Title</MudText>
+		<MudPaper Elevation="8">
+			<MudCard Outlined="true">
+				<MudForm Model="@Model" @ref="@_form" Validation="@(_playerFormValidator.ValidateValue)">
+					<MudCardContent>
+						<MudTextField @bind-Value="Model.Name"
+						              For="@(() => Model.Name)"
+						              Immediate="true"
+						              Label="Name"/>
+
+						<MudTextField @bind-Value="Model.Surname"
+						              For="@(() => Model.Surname)"
+						              Immediate="true"
+						              Label="Surname"/>
+
+						<MudDatePicker Label="Birth date"
+						               @bind-Date="Model.BirthDate"
+						               For="@(() => Model.BirthDate)"
+						               DisableToolbar="true"/>
+
+						<MudSelect @bind-Value="@Model.Gender"
+						           Label="Gender">
+							@foreach (Gender item in Enum.GetValues(typeof(Gender)))
+							{
+								<MudSelectItem Value="@item">@item.ToString()</MudSelectItem>
+							}
+						</MudSelect>
+
+						<MudSelect @bind-Value="@Model.Country"
+						           Label="Country">
+							@foreach (Country item in Enum.GetValues(typeof(Country)))
+							{
+								<MudSelectItem Value="@item">@item.ToString()</MudSelectItem>
+							}
+						</MudSelect>
+
+						<MudItem >
+							<MudAutocomplete T="string"
+							                 Label="Team name"
+							                 ResetValueOnEmptyText="true"
+							                 @bind-Value="@Model.TeamName"
+							                 For="@(() => Model.TeamName)"
+							                 SearchFunc="@(Search)"
+							                 CoerceText="false" CoerceValue="true"/>
+						</MudItem>
+
+					</MudCardContent>
+				</MudForm>
+				<MudCardActions Class="justify-center">
+					<MudButton Variant="Variant.Filled"
+					           Color="Color.Primary"
+					           Disabled="@IsProcessing"
+					           OnClick="@(async () => await SendDataAsync())">
+						@if (IsProcessing)
+						{
+							<MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+							<MudText Class="ms-2">Processing</MudText>
+						}
+						else
+						{
+							<Mutex>Save</Mutex>
+						}
+					</MudButton>
+				</MudCardActions>
+			</MudCard>
+		</MudPaper>
+	</MudItem>
+</MudGrid>
+}
+
+

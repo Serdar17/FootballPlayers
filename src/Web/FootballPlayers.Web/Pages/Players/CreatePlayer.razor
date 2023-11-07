@@ -1,0 +1,9 @@
+﻿@page "/"
+@inherits CreatePlayerBase;
+
+
+<CascadingValue Value="@Model" Name="Model">
+    <CascadingValue Value="@Title" Name="Title">
+        <PlayerForm />
+    </CascadingValue>
+</CascadingValue>

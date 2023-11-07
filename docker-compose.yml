@@ -8,8 +8,17 @@ services:
     image: ${DOCKER_REGISTRY-}playersapi
     build:
       context: .
-      dockerfile: src/Web/Api/Dockerfile
+      dockerfile: src/Web/FootballPlayers.Api/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     depends_on: 
       - players_postgresql
+  
+  players_web:
+    image: ${DOCKER_REGISTRY-}playersweb
+    build:
+      context: .
+      dockerfile: src/Web/FootballPlayers.Web/Dockerfile
+    depends_on: 
+      - players_postgresql
+      - players_api
