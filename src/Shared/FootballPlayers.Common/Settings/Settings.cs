@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace FootballPlayers.Settings;
+namespace FootballPlayers.Common.Settings;
 
 public abstract class Settings
 {

@@ -9,7 +9,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Domain\FootballPlayers.Infrastructure.Abstractions\FootballPlayers.Infrastructure.Abstractions.csproj" />
       <ProjectReference Include="..\..\Shared\FootballPlayers.Common\FootballPlayers.Common.csproj" />
-      <ProjectReference Include="..\..\Shared\FootballPlayers.Settings\FootballPlayers.Settings.csproj" />
     </ItemGroup>
 
     <ItemGroup>

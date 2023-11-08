@@ -15,9 +15,9 @@ public static class CorsConfiguration
         {
             builder.AddDefaultPolicy(pol =>
             {
+                pol.WithOrigins("http://localhost:5085");
                 pol.AllowAnyHeader();
                 pol.AllowAnyMethod();
-                pol.AllowAnyOrigin();
             });
         });
         return services;

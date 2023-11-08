@@ -14,7 +14,7 @@ public static class DependencyInjection
     
     public static IServiceCollection AddAppContext(this IServiceCollection services, IConfiguration configuration = null)
     {
-        var settings = FootballPlayers.Settings.Settings.Load<DbSettings>(DbSettings.SectionName, configuration);
+        var settings = Common.Settings.Settings.Load<DbSettings>(DbSettings.SectionName, configuration);
         services.AddSingleton(settings);
 
         services.AddDbContext<AppDbContext>(opt =>
