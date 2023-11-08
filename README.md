@@ -18,18 +18,12 @@ dotnet run --project ./src/Web/FootballPlayers.Web
 ```
 
 ### DOCKER COMPOSE
-Для запуска через `docker-compose.yml` не надо менять `appsettings.json` 
-
-Для билда
-
-``` bash
-docker-compose build
-```
+Для запуска через `docker-compose.yml` не надо менять `appsettings.json`
 
 Для запуска
 
 ``` bash
-docker-compose up -d
+docker-compose up --build -d
 ```
 
 Для закрытия контейнеров

@@ -41,8 +41,8 @@ public class PlayerRepository : IPlayerRepository
 
     public async Task DeleteAsync(Guid id)
     {
-        var entity = await GetByIdAsync(id);
-        ProcessException.ThrowIf(() => entity is null, $"Player with id={id} was not found");
-        _context.Players.Remove(entity);
+        await _context.Players
+            .Where(x => x.Id.Equals(id))
+            .ExecuteDeleteAsync();
     }
 }

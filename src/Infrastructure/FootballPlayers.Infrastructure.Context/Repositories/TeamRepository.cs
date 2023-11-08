@@ -55,8 +55,8 @@ public class TeamRepository : ITeamRepository
 
     public async Task DeleteAsync(Guid id)
     {
-        var entity = await GetByIdAsync(id);
-        ProcessException.ThrowIf(() => entity is null, $"Player with id={id} was not found");
-        _context.Teams.Remove(entity);
+        await _context.Teams
+            .Where(x => x.Id.Equals(id))
+            .ExecuteDeleteAsync();
     }
 }
