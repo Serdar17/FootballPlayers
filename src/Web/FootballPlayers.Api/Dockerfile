@@ -6,7 +6,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["src/Web/FootballPlayers.Api/FootballPlayers.Api.csproj", "src/Web/FootballPlayers.Api/"]
-COPY ["src/Shared/FootballPlayers.Settings/FootballPlayers.Settings.csproj", "src/Shared/FootballPlayers.Settings/"]
 COPY ["src/Domain/FootballPlayers.Infrastructure.Abstractions/FootballPlayers.Infrastructure.Abstractions.csproj", "src/Domain/FootballPlayers.Infrastructure.Abstractions/"]
 COPY ["src/Domain/FootballPlayers.Domain/FootballPlayers.Domain.csproj", "src/Domain/FootballPlayers.Domain/"]
 COPY ["src/Shared/FootballPlayers.Common/FootballPlayers.Common.csproj", "src/Shared/FootballPlayers.Common/"]

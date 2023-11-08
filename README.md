@@ -37,3 +37,7 @@ docker-compose up -d
 ``` bash
 docker-compose down
 ```
+
+### Примечание
+После первого запуска контейнеров возможно не запустится контейнер `footballplayers-players_api-1`, необходимо перезапустить его в 
+`Docker Desctop`
